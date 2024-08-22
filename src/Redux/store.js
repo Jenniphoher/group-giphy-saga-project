@@ -4,7 +4,30 @@ import createSagaMiddleware from 'redux-saga';
 import axios from 'axios';
 import { takeLatest, put } from 'redux-saga/effects';
 
+// * ---------- REDUCERS ---------- * //
+// FAVORITE REDUCER //
+const favoriteReducer = (state = {}, action) => {
+    switch (action.type) {
+    case 'SET_FAV_GIPHS':
+        return action.payload;
+     default: return state;
+    }
+}
 
+// * ---------- SAGAS ---------- * //
+function* fetchFavGiph() {
+    try {
+        const giphResponse = yield axios.get('/api/favorties')
+        console.log('GIPH response:', giphResponse.data);
+    
+        yield put({
+            type: 'SET_FAV_GIPHS',
+            payload: giphResponse.data
+        })
+    } catch (error) {
+        console.log('Error fetching GIPH:', error);
+    }
+}
 
 // 4. Setup Root Saga
 function* rootSaga() {

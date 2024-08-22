@@ -7,11 +7,22 @@ import { useEffect } from "react";
 // Or make another component for the favorite button passing 'giph' as prop
 
 
-function FavoritePage() {
+function FavoritePage({ entry }) {
+    const giphsList = useSelector((store) => store.categoryReducer);
 
-    return (
+    useEffect(() => 
+        dispatch({
+            type: 'GET_GIPHS'
+        }), []);
 
-    )
+    const getGiphs = () => {
+        dispatch({
+            type: 'FETCH_FAV_GIPHS',
+            payload: 'PAYLOAD'
+        })
+}
+
+    return 
 
 }
 

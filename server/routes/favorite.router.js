@@ -8,6 +8,21 @@ router.get('/', (req, res) => {
   res.sendStatus(200);
 });
 
+router.get('/', (req, res) => {
+  const queryText = `SELECT * FROM "favorites".id, "favorites".image_url, "categories".name'
+    FROM "favorites"
+    LEFT JOIN "categories" ON "favorites".categories_id = "categories".id
+    ORDER BY "favorites".id DESC`
+  pool.query(queryText)
+    .then((result) => {
+    res.send(result.rows);
+  })
+    .catch((error) => {
+    console.log('YO! Error SELECT favorites', error);
+    res.sendStatus(500);
+  });
+  })
+
 // add a new favorite
 router.post('/', (req, res) => {
   res.sendStatus(201);

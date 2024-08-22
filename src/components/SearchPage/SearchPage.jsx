@@ -6,9 +6,7 @@ import { useEffect } from "react";
 function SearchPage() {
     const dispatch = useDispatch();
 
-    return (
-
-    )
+    return 
 
 }
 
