@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    margin: 30px auto;
+    font-size: 80px;
+}
+
+nav {
+    margin: 15px auto;
+    padding: 10px 0px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 30vh;
+    font-size: 18px;
+}
+
+form {
+    margin: 20px auto;
+}
+
+input {
+    margin: 20px 5px;
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+}
+
+button {
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    padding: 2px 4px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+.randomGiphDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.renderedGiph {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    margin: 10px;
+    border-radius: 5px;
+    height: 200px;
+    width: 200px;
+}
+
+.favPostButton {
+    margin: 60px auto;
+}

@@ -8,6 +8,7 @@ import { useEffect } from "react";
 
 
 function FavoritePage() {
+    const history = useHistory();
     const dispatch = useDispatch();
     useEffect (() => getCategories(), []);
 
@@ -16,6 +17,10 @@ function FavoritePage() {
     const getCategories = () => {
         console.log('in getCategories function in Favorites page')
         dispatch ({type: 'GET_CATEGORIES'})
+    }
+
+    const searchButton = () => {
+        history.push('/search');
     }
 
     return (
@@ -35,6 +40,8 @@ function FavoritePage() {
                     
                 </fieldset>
             </form>
+
+            <button onClick={searchButton}>Search Giphs</button>
         </div>
 
     )

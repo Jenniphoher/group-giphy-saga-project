@@ -38,14 +38,23 @@ function* getCategories() {
 
 function* fetchFavGiph(action) {
     try {
-        yield axios.post('/api/favorites', {url: action.payload})
+        yield axios.post('/api/favorites', {image_url: action.payload})
         yield put ({type: 'FETCH_FAV_GIPHS'})
     } catch (error) {
         console.log('HEY!!! SAGA error POST fav giph:', error);
     }
 }
 
-// Generator functions
+function* favoriteGiph(action) {
+    console.log('Saga POST fav to database:', action.payload);
+    try {
+        yield axios.post('/api/favorites', {image_url: action.payload})
+    } catch (error) {
+        console.log('HEY!!! SAGA error POST fav giph:', error);
+    }
+}
+
+// GET random giph 
 function* fetchGiphs(action) {
     console.log('Saga GET action.payload:', action.payload);
     try {
@@ -65,7 +74,7 @@ function* fetchGiphs(action) {
 // 4. Setup Root Saga
 function* rootSaga() {
 yield takeLatest('FETCH_GIPHS', fetchGiphs)
-// yield takeLatest('ADD_FAV', favoriteGiph)
+yield takeLatest('ADD_FAV', favoriteGiph)
 yield takeLatest('FETCH_FAV_GIPHS', fetchFavGiph)
 yield takeLatest('GET_CATEGORIES', getCategories)
 // yield takeLatest('PUT_GIF', putGif)

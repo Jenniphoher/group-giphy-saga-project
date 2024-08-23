@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function SearchPage() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [search, setSearch] = useState(0);
     const searchReducer = useSelector(store => store.searchReducer);
 
@@ -23,6 +25,11 @@ function SearchPage() {
         setSearch('');
     }
 
+
+    const favButton = () => {
+        history.push('/favorites');
+    }
+
     return (
         <div>
 
@@ -34,16 +41,24 @@ function SearchPage() {
                 <button>Search</button>
             </form>
             <h2>Your Giphs!!</h2>
-            <ul>
-            {searchReducer.length < 1 ? '' : searchReducer.data.map((giph) => {
-                    return (
-                        <li>
-                            <img src={giph.images.original.url} />
-                        </li>
-                    )
-            })}
-            </ul>
-
+            <div className="randomGiphDiv">
+                {searchReducer.length < 1 ? '' : searchReducer.data.map((giph) => {
+                        return (
+                            <div className="renderedGiph">
+                                <img src={giph.images.original.url} />
+                                <button onClick={(e) => {
+                                    e.preventDefault()
+                                    dispatch({
+                                        type: 'ADD_FAV',
+                                        payload: giph.images.original.url
+                                    })
+                                }}>Favorite</button>
+                            </div>
+                        )
+                })}
+            </div>
+            <button className="favPostButton"
+                    onClick={favButton}>Go to Favorites</button>
         </div>
 
     )
