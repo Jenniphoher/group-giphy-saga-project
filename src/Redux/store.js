@@ -26,13 +26,26 @@ function* getCategories() {
     }
     }
 
+    function* putGiph(action) {
+        try {
+            const giphId = action.payload.giphId;
+            const categoryId = action.payload.categoryId;
+            console.log('putting giph the ids are: ', giphId, categoryId)
+            yield axios.put(`/api/favorites/${giphId}`, { categoryId });
+            // yield put(console.log('put route successfully compelted!'));
+            // put should eventually be: { type: 'SET_FAV_GIPHS' }
+        } catch (error) {
+            console.log('error in put', error);
+        }
+        }
+
 // 4. Setup Root Saga
 function* rootSaga() {
 // yield takeLatest('FETCH_GIPHS', fetchGiphs)
 // yield takeLatest('ADD_FAV', favoriteGiph)
 // yield takeLatest('FETCH_FAV_GIPHS', fetchFavGiph)
 yield takeLatest('GET_CATEGORIES', getCategories)
-// yield takeLatest('PUT_GIF', putGif)
+yield takeLatest('PUT_GIPH', putGiph)
 
 }
 
