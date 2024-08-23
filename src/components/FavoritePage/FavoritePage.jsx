@@ -31,6 +31,7 @@ function FavoritePage() {
         };
 
     return (
+
         <div>
             <h1>Favorites Page</h1>
             <p>Choose your favorite Web language:</p>
@@ -40,6 +41,7 @@ function FavoritePage() {
                     <legend>Pick a category for your gif:</legend>
                     {categories.map((category) => {
                         return(
+
                             <label key = {category.id}>
                                 <input 
                                     type='radio' 
@@ -49,13 +51,13 @@ function FavoritePage() {
                                 /> 
                                 {category.name}
                             </label>
-                            
                         )
                     })}
                     <button onClick={addCategoryToGiph}>Submit</button>
                 </fieldset>
             </form>
         </div>
+
     )
 
 }
