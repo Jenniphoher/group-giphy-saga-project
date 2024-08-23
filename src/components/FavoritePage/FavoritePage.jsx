@@ -10,14 +10,26 @@ import { useState } from "react";
 
 function FavoritePage() {
     const dispatch = useDispatch();
-    useEffect (() => getCategories(), []);
+    useEffect (() => onLoad(), []);
 
     const categories = useSelector(store => store.categoriesReducer);
+    const favorites = useSelector(store => store.favoritesReducer);
     const [categoryId, setCategoryId] = useState ('')
+
+    const onLoad = () => {
+        getCategories();
+        getFavGiphs();
+    }
 
     const getCategories = () => {
         console.log('in getCategories function in Favorites page')
         dispatch ({type: 'GET_CATEGORIES'})
+    }
+
+    const getFavGiphs = () => {
+        dispatch({
+            type: 'FETCH_FAV_GIPHS'
+        })
     }
 
     const addCategoryToGiph = (event) => {
@@ -35,27 +47,35 @@ function FavoritePage() {
         <div>
             <h1>Favorites Page</h1>
             <p>Choose your favorite Web language:</p>
+            <div>
+                    {favorites.map((giph) => {
+                        return (
+                            <div key = {giph.id}> 
+                                <img src={giph.image_url} />
+                                <form>
+                                    <fieldset>
+                                        <legend>Pick a category for your gif:</legend>
+                                        {categories.map((category) => {
+                                            return(
 
-            <form>
-                <fieldset>
-                    <legend>Pick a category for your gif:</legend>
-                    {categories.map((category) => {
-                        return(
-
-                            <label key = {category.id}>
-                                <input 
-                                    type='radio' 
-                                    name='radio' 
-                                    value= {category.name} 
-                                    onChange={(e) => setCategoryId(category.id)}
-                                /> 
-                                {category.name}
-                            </label>
+                                                <label key = {category.id}>
+                                                    <input 
+                                                        type='radio' 
+                                                        name='radio' 
+                                                        value= {category.name} 
+                                                        onChange={(e) => setCategoryId(category.id)}
+                                                    /> 
+                                                    {category.name}
+                                                </label>
+                                            )
+                                        })}
+                                        <button onClick={addCategoryToGiph}>Submit</button>
+                                    </fieldset>
+                                </form>
+                            </div>
                         )
                     })}
-                    <button onClick={addCategoryToGiph}>Submit</button>
-                </fieldset>
-            </form>
+            </div>
         </div>
 
     )
