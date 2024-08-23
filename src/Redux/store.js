@@ -26,7 +26,19 @@ const categoriesReducer = (state= [], action) => {
     
     }
 
-function* getCategories() {
+const favoritesReducer = (state= [], action) => {
+
+        if(action.type === 'SET_FAV_GIPHS'){
+        
+        return action.payload
+        
+        }
+        
+        return state
+        
+        }
+
+function* getCategories(action) {
     try {
         const response = yield axios.get(`/api/categories`);
         console.log('Getting categories', response.data);
@@ -38,8 +50,8 @@ function* getCategories() {
 
 function* fetchFavGiph(action) {
     try {
-        yield axios.post('/api/favorites', {image_url: action.payload})
-        yield put ({type: 'FETCH_FAV_GIPHS'})
+        const response = yield axios.get('/api/favorites')
+        yield put ({type: 'SET_FAV_GIPHS', payload: response.data})
     } catch (error) {
         console.log('HEY!!! SAGA error POST fav giph:', error);
     }
@@ -71,13 +83,26 @@ function* fetchGiphs(action) {
 
 }
 
+    function* putGiph(action) {
+        try {
+            const giphId = action.payload.giphId;
+            const categoryId = action.payload.categoryId;
+            console.log('putting giph the ids are: ', giphId, categoryId)
+            yield axios.put(`/api/favorites/${giphId}`, { categoryId });
+            // yield put(console.log('put route successfully compelted!'));
+            // put should eventually be: { type: 'SET_FAV_GIPHS' }
+        } catch (error) {
+            console.log('error in put', error);
+        }
+        }
+
 // 4. Setup Root Saga
 function* rootSaga() {
 yield takeLatest('FETCH_GIPHS', fetchGiphs)
 yield takeLatest('ADD_FAV', favoriteGiph)
 yield takeLatest('FETCH_FAV_GIPHS', fetchFavGiph)
 yield takeLatest('GET_CATEGORIES', getCategories)
-// yield takeLatest('PUT_GIF', putGif)
+yield takeLatest('PUT_GIPH', putGiph)
 
 }
 
@@ -90,7 +115,8 @@ const store = createStore(
     combineReducers({
 
         searchReducer,
-        categoriesReducer
+        categoriesReducer,
+        favoritesReducer
 
     }),
     // 3. Add sagaMiddleware to our store
