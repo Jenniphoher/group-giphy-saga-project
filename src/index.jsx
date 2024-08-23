@@ -5,6 +5,7 @@ import App from './components/App/App';
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
 import store from './Redux/store';
+import './index.css'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

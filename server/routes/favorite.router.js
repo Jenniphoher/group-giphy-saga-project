@@ -23,8 +23,11 @@ router.get('/', (req, res) => {
 
 // add a new favorite
 router.post('/', (req, res) => {
-  let queryText = `
 
+  const favGiph = req.body.image_url.image_url;
+  console.log('req.body:', req.body);
+  console.log('This is post body:', favGiph);
+  let queryText = `
   INSERT INTO "favorites"
     ("image_url")
     VALUES

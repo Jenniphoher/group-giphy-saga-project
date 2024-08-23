@@ -1,9 +1,9 @@
 import FavoritePage from '../FavoritePage/FavoritePage.jsx'
 import SearchPage from '../SearchPage/SearchPage.jsx'
+import Nav from '../Nav/Nav.jsx';
 import {
   HashRouter as Router,
   Route,
-  Link,
   useLocation
   } from "react-router-dom/cjs/react-router-dom.min.js";
   import React from 'react';
@@ -13,8 +13,9 @@ function App() {
     <div>
       <h1>Giphy Search!</h1>
 
-      <Router>    
-        <Route exact path="/">
+      <Nav /> 
+      <Router>   
+        <Route exact path="/search">
           <SearchPage />
         </Route>
 
