@@ -27,9 +27,9 @@ function FavoritePage() {
             <form>
                 <fieldset>
                     <legend>Pick a category for your gif:</legend>
-                    {categories.map((category) => {
+                    {giphList.map((giph) => {
                         return(
-                            <label><input type='radio' name='radio' value= {category.name} /> {category.name}</label>
+                            <img src={giph.url} />
                         )
                     })}
                     
