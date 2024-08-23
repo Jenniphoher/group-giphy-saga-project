@@ -25,6 +25,7 @@ function SearchPage() {
 
     return (
         <div>
+
             <form onSubmit={fetchGiphs}>
                 <input type='text'
                         placeholder="search giphs"
@@ -42,7 +43,7 @@ function SearchPage() {
                     )
             })}
             </ul>
-            
+
         </div>
 
     )
