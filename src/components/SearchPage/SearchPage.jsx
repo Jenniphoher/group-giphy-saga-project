@@ -7,7 +7,9 @@ function SearchPage() {
     const dispatch = useDispatch();
 
     return (
-
+        <div>
+            <h1>Search Page</h1>
+        </div>
     )
 
 }
