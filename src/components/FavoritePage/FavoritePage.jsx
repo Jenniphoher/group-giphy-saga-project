@@ -10,7 +10,7 @@ import { useEffect } from "react";
 function FavoritePage() {
 
     return (
-
+        <div></div>
     )
 
 }
