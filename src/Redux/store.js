@@ -26,7 +26,19 @@ const categoriesReducer = (state= [], action) => {
     
     }
 
-function* getCategories() {
+const favoritesReducer = (state= [], action) => {
+
+        if(action.type === 'SET_FAV_GIPHS'){
+        
+        return action.payload
+        
+        }
+        
+        return state
+        
+        }
+
+function* getCategories(action) {
     try {
         const response = yield axios.get(`/api/categories`);
         console.log('Getting categories', response.data);
@@ -38,8 +50,8 @@ function* getCategories() {
 
 function* fetchFavGiph(action) {
     try {
-        yield axios.post('/api/favorites', {url: action.payload})
-        yield put ({type: 'FETCH_FAV_GIPHS'})
+        const response = yield axios.get('/api/favorites')
+        yield put ({type: 'SET_FAV_GIPHS', payload: response.data})
     } catch (error) {
         console.log('HEY!!! SAGA error POST fav giph:', error);
     }
@@ -94,7 +106,8 @@ const store = createStore(
     combineReducers({
 
         searchReducer,
-        categoriesReducer
+        categoriesReducer,
+        favoritesReducer
 
     }),
     // 3. Add sagaMiddleware to our store
