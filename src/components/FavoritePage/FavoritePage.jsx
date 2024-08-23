@@ -19,6 +19,7 @@ function FavoritePage() {
     }
 
     return (
+
         <div>
             <h1>Favorites Page</h1>
             <p>Choose your favorite Web language:</p>
@@ -35,6 +36,7 @@ function FavoritePage() {
                 </fieldset>
             </form>
         </div>
+
     )
 
 }
