@@ -5,7 +5,7 @@ import { useEffect } from "react"
 function SearchPage() {
     const dispatch = useDispatch();
     const [search, setSearch] = useState(0);
-    const searchReducer = useSelector(store => store.searchReducer.data);
+    const searchReducer = useSelector(store => store.searchReducer);
 
     useEffect(() => {
         fetchGiphs();
@@ -35,7 +35,7 @@ function SearchPage() {
             </form>
             <h2>Your Giphs!!</h2>
             <ul>
-            {searchReducer.length < 1 ? '' : searchReducer.map((giph) => {
+            {searchReducer.length < 1 ? '' : searchReducer.data.map((giph) => {
                     return (
                         <li>
                             <img src={giph.images.original.url} />
